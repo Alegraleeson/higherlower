@@ -1,61 +1,74 @@
-// Create a webpage that simulates a number guessing game. On load, the page should generate a random number between 1 and 20. The user will enter a guess into a text input and click a button to submit the guess.
 
-// When submitted, one of the following messages should be displayed:
-
-// "You got it!" if the guess is right.
-// "No, try a higher number." if the guess is too low.
-// "No, try a lower number." if the guess is too high.
-
-
+const title = document.getElementById('title')
 const response = document.getElementById('response')
 const submitButton = document.getElementById('submit')
 const form = document.getElementById('guess-form')
 const guess = document.getElementById('guess')
 
+let valid_input = false;
+let userMax, maxNumber;
+
+while(!valid_input) {
+    userMax = window.prompt("What should the maximum number be?");
+
+    maxNumber = Math.round(Number(userMax));
+    
+    console.log(maxNumber)
+
+    if (!isNaN(maxNumber) && maxNumber > 0) {
+        valid_input = true;
+    }
+
+    title.innerHTML = `Guess a number between 1 and ${maxNumber}`
+}
+
 
 let number = 0
 
 function getNumber(){
-    number = Math.floor(Math.random() * 20) + 1;
+    number = Math.floor(Math.random() * maxNumber) + 1;
     console.log(number)
     
 }
 
 getNumber();
 
+let guessArray = []
+
 function higherLower(){
+    
     input = +guess.value
-    // console.log('HigherLower')
-    // console.log(guess.value)
-    // console.log(typeof 'guess.value')
+    guess.value = ''
 
     if(input === number){
-        response.innerHTML = 'You got it!'
-        console.log('You got it!')
-    } else if(input < number){
-        console.log('No, try a higher number')
-            response.innerHTML = 'No, try a higher number.'
+        guessArray.push(input)
+        if(guessArray.length == 1){
+            response.innerHTML = `<p style="color: green;">You got it! It took you ${guessArray.length} try and your guess was ${guessArray}.</p>`
+        } else {
+            response.innerHTML = `<p style="color: green;">You got it! It took you ${guessArray.length} tries and your guesses were ${guessArray}.</p>`
+
+        }
+    } else if (input < 1 || input > maxNumber){
+        response.innerHTML = '<p style="color: red;"> That number is not in range; please try again.</p>'
+    } else if (isNaN(input)){
+        response.innerHTML = '<p style="color: red;">That is not a number!</p>'
+    } else if (guessArray.includes(input)){
+        response.innerHTML = '<p style="color: red;">That number has already been guessed.  Please try again.</p>'
+    } else if (input < number){
+        guessArray.push(input)
+            response.innerHTML = '<p style="color: orange;">No, try a higher number.</p>'
     } else if(input > number){
-        console.log('No, try a lower number')
-            response.innerHTML = 'No, try a lower number.'
-    } else {
-        console.log('Invalid input')
-            response.innerHTML = 'Input invalid.  Guess a number between 1 and 20.'
-    }
-}
-
-function handleSubmit(e) {
-e.preventDefault();
-higherLower(guess);
-
-}
-
+        guessArray.push(input)
+            response.innerHTML = '<p style="color: orange;">No, try a lower number.</p>'
+    } 
     
-// submitButton.addEventListener('click', higherLower())
+    
    
+}
+
 submitButton.addEventListener("click", function(event) {
     event.preventDefault();
     higherLower();
   });
 
-// HigherLower(6)
+

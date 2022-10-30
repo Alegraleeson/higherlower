@@ -1,0 +1,38 @@
+body {
+    text-align: center;
+}
+
+#title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.formElement {
+    display: block;
+    margin: 10px auto 10px auto;
+    font-weight: bold;
+}
+
+#guess {
+    box-shadow: 2px 2px 2px lightgrey inset;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    margin: 10px auto 10px auto;
+    padding: 0;
+}
+
+button {
+    display: inline;
+    align-self: center;
+    box-shadow: 3px 3px;
+    margin: 10px 10px 10px 10px;
+}
+
+p {
+    font-weight: bold;
+}

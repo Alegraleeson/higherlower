@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css" type="text/css">
     <title>Higher Lower</title>
 </head>
 <body>
     <form id="guess-form">
-        <legend>Guess A Number Between 1 and 20</legend>
-        <label for="guess">Your Guess: </label>
+        <a href="./index.html"></a><h1>Higher - Lower</h1></a>
+        <h3 id="title">Guess A Number</h3>
+        <label for="guess" class="formElement">Your Guess: </label>
 
-        <input id="guess" name="guess" type="text">
-        <button id="submit" type="submit" >Submit</button>
+        <input id="guess" name="guess" class="formElement" type="text">
+        <section id="button-container">
+            <button id="submit" type="submit" class="formElement">Submit</button>
+        <button id="reset" onClick="window.location.reload();" class="formElement">Reset</button>
+
+        </section>
+        
     </form>
 
     <section id="response"></section>
